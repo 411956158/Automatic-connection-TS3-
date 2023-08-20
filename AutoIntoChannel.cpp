@@ -127,7 +127,7 @@ HWND FindTeamSpeakWindow(){
 
 		// Get the window name of the window
 		GetWindowTextW(hwnd, windowName, sizeof(windowName)/2);
-		printf("%ws\n", windowName);
+		//printf("%ws\n", windowName);
 
 		// Check if the window name contains "TeamSpeak"
 		if (wcsstr(windowName, L"TeamSpeak") != NULL)
