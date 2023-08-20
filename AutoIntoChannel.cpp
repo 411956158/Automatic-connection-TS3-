@@ -1,5 +1,5 @@
 ﻿// AutoIntoChannel.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
+
 #include <stdio.h>
 #include <iostream>
 #include <windows.h>
@@ -18,15 +18,6 @@ std::string address = "start C:\\Users\\Public\\Desktop\\TeamSpeak3Client.lnk";
 
 int main()
 {
-	/*printDashEverySecond();
-    std::cout << "Hello World!\n";
-	printDashEverySecond();
-	printf("等待安全时间\n");
-	printDashEverySecond();
-	printDashEverySecond();
-	// Wait for user to press any key
-	//std::cout << "Press any key to continue...\n";
-	//std::cin.get();*/
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);//设置浅黄色
 	printf("开始打开文件\n");
 	if (openFile(address)) {
@@ -74,9 +65,6 @@ void printDashEverySecond(int ms100) {
 }
 
 int simulateCtrlS() {
-	// This function simulates the pressing of Ctrl+S keys
-	// VK_CONTROL represents the 'Ctrl' key and 'S' represents the 'S' key
-	// KEYEVENTF_KEYUP is used to simulate the release of a key
 
 	// Press Ctrl key
 	keybd_event(VK_CONTROL, 0, 0, 0);
@@ -135,7 +123,7 @@ HWND FindTeamSpeakWindow(){
 			// Set the focus to the window
 			//SetFocus(hwnd);
 			SetForegroundWindow(hwnd);
-			printf("AAA赋予窗口焦点成功%ws\n\n", windowName);
+			printf("检测到赋予窗口焦点成功%ws\n\n", windowName);
 			forceSucccess = 1;
 			//break;
 		}
