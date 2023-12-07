@@ -12,28 +12,59 @@ int simulateCtrlS();
 void printDashEverySecond(int ms100);
 HWND FindTeamSpeakWindow();
 
-int forceSucccess = 0;
+//DWORD errid;
 
-std::string address = "start C:\\Users\\Public\\Desktop\\TeamSpeak3Client.lnk";
+int forceSucccess = 0;
+short tryForcetime = 0;
+
+std::string address = "start C:\\Users\\Public\\Desktop\\\"TeamSpeak 3 Client.lnk\"";
+std::string address2 = "start C:\\Users\\Public\\Desktop\\\"TeamSpeak3Client.lnk\"";
 
 int main()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);//设置浅黄色
 	printf("开始打开文件\n");
-	if (openFile(address)) {
+	
+	if (openFile(address)!= 0) {
+		//errid = GetLastError();
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);//设置浅绿色
-		printf("开始打开文件成功\n\n");
+		printf("开始打开文件成功11\n\n");
+	}
+	else if (openFile(address) != 0) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);//设置浅绿色
+		printf("开始打开文件成功12\n\n");
+	}
+	else if (openFile(address2) != 0) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);//设置浅绿色
+		printf("开始打开文件成功21\n\n");
+	}
+	else if(openFile(address2) != 0){
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);//设置浅绿色
+		printf("开始打开文件成功22\n\n");
 	}
 	else {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);//设置浅红色
-		printf("开始打开文件失败，请查看日志\n\n");
+		printf("开始打开文件失败try out，请查看日志\n\n");
+		Sleep(1000);
+		exit(114);
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);//设置浅黄色
 
 	printDashEverySecond(6);
 
 	FindTeamSpeakWindow();
-	if (forceSucccess == 0) {
+
+	do {
+		printDashEverySecond(5);
+		FindTeamSpeakWindow();
+	} while (forceSucccess != 1 && tryForcetime < 3); 
+
+	if (forceSucccess != 1 && tryForcetime >= 3) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);//设置浅红色
+		printf("赋予窗口焦点失败01，请查看日志\n\n");
+	}
+
+	/*if (forceSucccess == 0) {
 		printDashEverySecond(5);
 		FindTeamSpeakWindow();
 	}
@@ -41,10 +72,14 @@ int main()
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);//设置浅绿色
 		printf("赋予窗口焦点成功\n\n");
 	}
+	else if (forceSucccess == 0) {
+		printDashEverySecond(5);
+		FindTeamSpeakWindow();
+	}
 	else {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);//设置浅红色
-		printf("赋予窗口焦点失败，请查看日志\n\n");
-	}
+		printf("赋予窗口焦点失败01，请查看日志\n\n");
+	}*/
 
 	printDashEverySecond(2);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);//设置浅黄色
@@ -122,7 +157,8 @@ HWND FindTeamSpeakWindow(){
 		{
 			// Set the focus to the window
 			//SetFocus(hwnd);
-			SetForegroundWindow(hwnd);
+			//SetForegroundWindow(hwnd);
+			SwitchToThisWindow(hwnd, true);
 			printf("检测到赋予窗口焦点成功%ws\n\n", windowName);
 			forceSucccess = 1;
 			//break;
