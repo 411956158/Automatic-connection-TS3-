@@ -50,7 +50,7 @@ int main()
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);//设置浅黄色
 
-	printDashEverySecond(6);
+	printDashEverySecond(8);
 
 	FindTeamSpeakWindow();
 
